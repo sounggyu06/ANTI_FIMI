@@ -1,0 +1,51 @@
+.spread-overview { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); margin-bottom: 16px; }
+.spread-selected, .spread-ranking { min-width: 0; padding: 15px 17px; }
+.spread-selected { border-right: 1px solid var(--line); }
+.spread-heading { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
+.spread-heading h2 { display: flex; align-items: center; gap: 7px; margin: 0; font-size: 12px; font-weight: 500; }
+.spread-heading > span { font-size: 9px; color: var(--muted); white-space: nowrap; }
+.spread-state { display: flex; align-items: center; gap: 12px; margin: 15px 0 12px; color: var(--cyan); }
+.spread-state > svg { flex-shrink: 0; }
+.spread-state strong { font-size: 19px; font-weight: 500; }
+.spread-state p { color: #9eb3c0; font-size: 10px; line-height: 1.7; margin: 4px 0 0; }
+.spread-state.insufficient, .spread-state.low_volume { color: #91a6b4; }
+.spread-state.accelerating { color: #dcbf82; }
+.spread-state.surging { color: #e7a56f; }
+.spread-state.declining { color: #90accc; }
+.spread-state-band { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.spread-state-band > span { text-align: center; color: #6d8595; border-top: 3px solid #273741; padding-top: 4px; font-size: 9px; transition: color .4s, border-color .4s; }
+.spread-state-band > span.active { color: var(--cyan); border-color: var(--cyan); }
+.spread-state-band > span.accelerating { color: var(--amber); border-color: var(--amber); }
+.spread-state-band > span.surging { color: #e7a56f; border-color: #e7a56f; }
+.spread-state-band > span.declining { color: #90accc; border-color: #90accc; }
+.spread-flow-chart { height: 100px; margin-top: 5px; }
+.spread-flow-legend { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 9px; }
+.spread-flow-legend > span { display: inline-flex; align-items: center; gap: 4px; }
+.spread-flow-legend i { width: 12px; border-top: 2px solid var(--cyan); }
+.spread-flow-legend i.accounts { border-top: 2px dashed var(--amber); }
+.spread-flow-legend small { margin-left: auto; font-size: 9px; }
+.spread-ranking-rule, .spread-ranking-note { color: var(--muted); font-size: 9px; line-height: 1.7; margin: 8px 0; }
+.spread-rank { display: block; width: 100%; padding: 8px 6px; margin: 3px 0; border: 1px solid transparent; background: transparent; border-radius: 4px; text-align: left; transition: background .2s, border-color .2s; }
+.spread-rank.selected { background: #1c2d37; border-color: #344e5d; }
+.spread-rank:hover { background: #20323d; }
+.spread-rank-label { display: flex; align-items: center; gap: 8px; }
+.spread-rank-label > i { color: var(--muted); font: normal 10px var(--mono); }
+.spread-rank-label > b { font-size: 10px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.spread-rank-label > small { color: var(--muted); font-size: 9px; white-space: nowrap; margin-left: auto; }
+.spread-rank-track { display: block; margin: 6px 0 0 18px; height: 5px; background: #263741; border-radius: 2px; overflow: hidden; }
+.spread-rank-track > span { display: block; height: 100%; background: var(--cyan); border-radius: 2px; transition: width .65s cubic-bezier(.22, .61, .36, 1), background .4s; }
+.spread-rank-track > span.accelerating { background: var(--amber); }
+.spread-rank-track > span.surging { background: #e7a56f; }
+.spread-rank-track > span.declining { background: #90accc; }
+.spread-rank-track > span.insufficient, .spread-rank-track > span.low_volume { background: #728996; }
+.spread-ranking-note { margin: 8px 6px 0; }
+.spread-method { grid-column: 1 / -1; padding: 8px 17px; border-top: 1px solid var(--line); font-size: 9px; color: var(--muted); }
+.spread-method summary { cursor: pointer; }
+.spread-method p { line-height: 1.8; margin: 8px 0 3px; }
+@media (max-width: 650px) {
+  .spread-overview { grid-template-columns: minmax(0, 1fr); }
+  .spread-selected { border-right: none; border-bottom: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spread-overview * { animation: none !important; transition: none !important; }
+}

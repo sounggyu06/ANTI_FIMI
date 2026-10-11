@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>Mock SNS — page 2</title></head><body>
+<h1>테스트 게시물 2페이지</h1>
+<article class="post" data-post-id="POST_005" data-author-id="user05" data-comment="false" data-reposts="0" data-retweet-original="/posts/POST_001">
+  <span class="account-name">user05</span><h2 class="post-title">게시물 공유</h2>
+  <p class="post-content">친구와 &nbsp; 같이 읽어보겠습니다.</p>
+  <time class="post-time" datetime="2026-10-10T16:20:00+09:00">16:20</time>
+  <span class="like-count">1M</span>
+</article>
+<article class="post" data-post-id="POST_006"><!-- 누락 필드 테스트 -->
+  <p class="post-content">계정 이름, 제목, 시각, 이미지, 좋아요가 없는 테스트입니다.</p>
+</article>
+<article class="post" data-post-id="POST_007" data-author-id="user07" data-comment="false" data-reposts="0">
+  <span class="account-name">user07</span><p class="post-content">작성 시각과 좋아요 표기가 잘못된 테스트입니다.</p>
+  <time class="post-time" datetime="잘못된 날짜">시각 없음</time><span class="like-count">알 수 없음</span>
+</article>
+<article class="post" data-post-id="POST_008" data-author-id="user08" data-comment="false" data-reposts="0">
+  <span class="account-name">user08</span><!-- 제목·본문·이미지가 없는 게시물도 보존 -->
+</article>
+</body></html>

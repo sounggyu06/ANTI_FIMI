@@ -1,0 +1,29 @@
+{
+  "notice": "가상 부정 시나리오 평가용 자료만 보존합니다. 실제 X 데이터는 별도 진위 판정 없이 가져옵니다.",
+  "assets": [
+    {
+      "original_filename": "뉴스샘플(부정).jpg",
+      "public_url": "/media/relief-news.jpg",
+      "evaluation_class": "manipulation_scenario",
+      "width": 1408,
+      "height": 768,
+      "sha256": "69c5fce0099905e16f9e1693455e4f92627b02fc435fc8cae85b7d492fd808c5"
+    },
+    {
+      "original_filename": "샘플이미지(부정).jpg",
+      "public_url": "/media/relief-field.jpg",
+      "evaluation_class": "manipulation_scenario",
+      "width": 1408,
+      "height": 768,
+      "sha256": "0334696171584f131a7d3c9a39ea7d40ee70053e3eba9dadd42c41075d7a52a0"
+    },
+    {
+      "original_filename": "구호활동(부정).jpg",
+      "public_url": "/media/relief-camp.jpg",
+      "evaluation_class": "manipulation_scenario",
+      "width": 1408,
+      "height": 768,
+      "sha256": "09f979b9dc317e88fe4a3ed40236559db437a45c60e498a6e18a659ced40cdbe"
+    }
+  ]
+}

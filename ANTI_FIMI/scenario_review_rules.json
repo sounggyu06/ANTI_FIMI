@@ -1,0 +1,361 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "rule_id": "SR_MEDIA_CITATION_CALL",
+      "scenario_id": "24",
+      "observable_label": "언론·인플루언서 인용 요청 문구",
+      "clauses_all": [
+        [
+          "기자",
+          "언론인",
+          "인플루언서",
+          "journalist",
+          "reporter",
+          "influencer",
+          "記者",
+          "记者"
+        ],
+        [
+          "인용해",
+          "보도해",
+          "취재해",
+          "please report",
+          "please quote",
+          "cover this story",
+          "報道して",
+          "引用して",
+          "请报道",
+          "请引用"
+        ]
+      ],
+      "interpretation": "언론·인플루언서를 지칭하면서 인용·보도를 요청하는 문구가 함께 관측됨.",
+      "missing_checks": [
+        "정상 제보·취재 요청인지 원문 맥락 확인",
+        "요청자의 조작 의도나 공모 관계는 문구로 확인할 수 없음",
+        "인용 대상의 원본과 독립 출처 대조"
+      ]
+    },
+    {
+      "rule_id": "SR_TARGET_HARM_CALL",
+      "scenario_id": "27",
+      "observable_label": "표적과 위해 행동 요청 문구",
+      "clauses_all": [
+        [
+          "그 사람",
+          "해당 기자",
+          "담당자",
+          "그 기자",
+          "이 계정",
+          "해당 계정",
+          "that journalist",
+          "that person",
+          "this account",
+          "target account",
+          "target journalist",
+          "その記者",
+          "这个记者",
+          "该账号"
+        ],
+        [
+          "죽여",
+          "찾아가 응징",
+          "공격하자",
+          "살해하",
+          "kill",
+          "attack",
+          "殺せ",
+          "袭击",
+          "杀死"
+        ]
+      ],
+      "interpretation": "구체적 표적을 가리키는 문구와 위해 행동 문구가 함께 관측됨.",
+      "missing_checks": [
+        "인용·비판·위협 신고 글인지 앞뒤 맥락 확인",
+        "실제 표적·위해의 구체성·긴급성 확인",
+        "집단 조정 여부는 별도 행동 근거 필요"
+      ]
+    },
+    {
+      "rule_id": "SR_EVACUATION_ACTION",
+      "scenario_id": "31",
+      "observable_label": "대피·구호 관련 행동 지시 문구",
+      "clauses_all": [
+        [
+          "대피",
+          "피란",
+          "구호",
+          "대피소",
+          "evacuation",
+          "evacuate",
+          "shelter",
+          "relief",
+          "避難",
+          "救援",
+          "疏散",
+          "避难"
+        ],
+        [
+          "이동하",
+          "대피하",
+          "가지 마",
+          "폐쇄됐",
+          "폐쇄되",
+          "출입 금지",
+          "go to",
+          "evacuate now",
+          "do not go",
+          "is closed",
+          "移動し",
+          "避難し",
+          "行かない",
+          "已关闭",
+          "立即前往",
+          "不要前往"
+        ]
+      ],
+      "interpretation": "대피·구호 대상과 실제 행동을 바꾸는 지시·폐쇄 안내 문구가 함께 관측됨.",
+      "missing_checks": [
+        "권한 있는 재난 대응기관의 현재 공지와 장소·시각 대조",
+        "질문·반박·정상 안내 여부 확인",
+        "주장의 진위와 안내자의 권한은 아직 미확인"
+      ]
+    },
+    {
+      "rule_id": "SR_VOTING_PROCEDURE_CHANGE",
+      "scenario_id": "32",
+      "observable_label": "투표 절차 변경 안내 문구",
+      "clauses_all": [
+        [
+          "투표소",
+          "투표일",
+          "투표 자격",
+          "투표 시간",
+          "polling station",
+          "polling place",
+          "voting date",
+          "voting eligibility",
+          "投票所",
+          "投票日",
+          "投票站",
+          "投票资格"
+        ],
+        [
+          "변경",
+          "취소",
+          "폐쇄",
+          "연기",
+          "자격 없다",
+          "changed",
+          "cancelled",
+          "closed",
+          "postponed",
+          "not eligible",
+          "変更",
+          "中止",
+          "变更",
+          "取消",
+          "关闭"
+        ]
+      ],
+      "interpretation": "투표 절차·장소·자격 대상과 변경 문구가 함께 관측됨.",
+      "missing_checks": [
+        "관할 선거관리기관 공지의 날짜·관할·원문 대조",
+        "정상 변경 공지·질문·정정 여부 확인",
+        "실제 유권자 행동에 미칠 영향 확인"
+      ]
+    },
+    {
+      "rule_id": "SR_MILITARY_ORDER_CLAIM",
+      "scenario_id": "33",
+      "observable_label": "항복·철수 및 군 지시 출처 확인",
+      "clauses_all": [
+        [
+          "전군",
+          "군 통수권자",
+          "총사령관",
+          "작전 명령",
+          "철수 명령",
+          "항복 명령",
+          "commander",
+          "armed forces",
+          "troops",
+          "military order",
+          "全軍",
+          "司令官",
+          "军队",
+          "总司令"
+        ],
+        [
+          "항복",
+          "전면 철수",
+          "철수하",
+          "무기를 내려",
+          "surrender",
+          "withdraw",
+          "lay down arms",
+          "降伏",
+          "撤退",
+          "投降",
+          "撤军"
+        ]
+      ],
+      "interpretation": "군 지휘·명령을 지칭하는 문구와 항복·철수 주장이 함께 관측됨.",
+      "missing_checks": [
+        "지휘기관의 인증된 원문·발표 시각·배포 경로 대조",
+        "정상 재배치·반박·질문과 전군 명령을 구분",
+        "명령 위조 여부·발신자 권한은 원문 인증 전 미확인"
+      ]
+    },
+    {
+      "rule_id": "SR_HEALTH_ACTION",
+      "scenario_id": "34",
+      "observable_label": "건강·오염 관련 행동 권고 문구",
+      "clauses_all": [
+        [
+          "수돗물",
+          "오염",
+          "방사능",
+          "백신",
+          "식수",
+          "contamination",
+          "contaminated",
+          "radiation",
+          "vaccine",
+          "drinking water",
+          "汚染",
+          "放射能",
+          "污染",
+          "饮用水"
+        ],
+        [
+          "마시지",
+          "복용하",
+          "폐기하",
+          "섭취하지",
+          "do not drink",
+          "take this",
+          "discard",
+          "stop taking",
+          "飲まない",
+          "服用し",
+          "不要饮用",
+          "服用"
+        ]
+      ],
+      "interpretation": "건강·오염 위험 대상과 섭취·복용 등 행동 권고가 함께 관측됨.",
+      "missing_checks": [
+        "관할 보건·환경기관의 검사 결과와 현재 권고 대조",
+        "정상 안전 공지·질문·반박 여부 확인",
+        "의료·환경 사실은 문구 규칙으로 판별할 수 없음"
+      ]
+    },
+    {
+      "rule_id": "SR_ALLIANCE_CONFLICT_CLAIM",
+      "scenario_id": "36",
+      "observable_label": "동맹·파병군 갈등 및 지원 중단 주장",
+      "clauses_all": [
+        [
+          "동맹",
+          "연합군",
+          "파병군",
+          "alliance",
+          "allied forces",
+          "deployed troops",
+          "同盟",
+          "派遣軍",
+          "盟军",
+          "驻军"
+        ],
+        [
+          "충돌",
+          "교전",
+          "지원도 끊",
+          "지원 중단",
+          "지원 종료",
+          "배신",
+          "갈등",
+          "clash",
+          "stopped support",
+          "withdraw support",
+          "betrayal",
+          "衝突",
+          "支援停止",
+          "冲突",
+          "停止援助"
+        ]
+      ],
+      "interpretation": "동맹·파병군 대상과 갈등·지원 중단 주장이 함께 관측됨. 분열 의도·서사 증폭 여부는 미확인.",
+      "missing_checks": [
+        "당사자 기관의 원문·현장 자료와 독립 보도 대조",
+        "실제 갈등 보도·질문·반박 여부 확인",
+        "의도적 분열이나 조직적 증폭을 판단하려면 별도 행동 근거 필요"
+      ]
+    },
+    {
+      "rule_id": "SR_VERIFICATION_DENIAL_FORMAT",
+      "scenario_id": "37",
+      "observable_label": "검증 형식의 사건 부인 문구",
+      "clauses_all": [
+        [
+          "팩트체크",
+          "검증 결과",
+          "fact check",
+          "fact-check",
+          "verified fact",
+          "ファクトチェック",
+          "事实核查",
+          "核查结果"
+        ],
+        [
+          "조작",
+          "배우",
+          "사건은 없",
+          "가짜",
+          "staged",
+          "actors",
+          "never happened",
+          "fabricated",
+          "捏造",
+          "俳優",
+          "伪造",
+          "演员"
+        ]
+      ],
+      "interpretation": "검증 형식을 표방하는 문구와 사건·영상의 부인 주장이 함께 관측됨.",
+      "missing_checks": [
+        "검증 기관의 실재성과 해당 원문·판정 근거 확인",
+        "정상 팩트체크인지 반증 위장인지 독립 자료로 확인",
+        "부인하는 사건·영상의 시간·장소·원본 대조"
+      ]
+    },
+    {
+      "rule_id": "SR_AUTHORITY_SOURCE_CLAIM",
+      "scenario_id": "04",
+      "observable_label": "공식 책임자 신원·자격 주장 출처 확인",
+      "clauses_all": [
+        [
+          "수석조정관",
+          "책임관",
+          "고위직",
+          "공식 책임자",
+          "공식 조정관"
+        ],
+        [
+          "공식 발표",
+          "공식 발표문",
+          "명의",
+          "발표했다",
+          "공문",
+          "신원"
+        ]
+      ],
+      "interpretation": "기관 책임자 또는 전문적 권위를 자칭하는 문구와 공식 발표·신원 주장이 함께 관측됨. 사칭 여부는 미확인.",
+      "missing_checks": [
+        "해당 기관의 공식 등록 계정과 발표 원문을 대조",
+        "발신자의 신원·권한을 독립적으로 검증",
+        "질문·인용·반박글인지 문맥을 확인"
+      ]
+    }
+  ]
+}

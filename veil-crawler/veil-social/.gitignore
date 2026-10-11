@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+data/*.tmp
+data/simulation.json
+data/x-import-state.json
+data/archive/
+*.sqlite*

@@ -1,0 +1,115 @@
+html_content = """<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANTI_FIMI | 근거 탐색</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#000000;color:#e8edf5;font:15px system-ui,sans-serif}
+header{padding:25px 32px;border-bottom:1px solid #333333}h1{margin:0 0 6px;font-size:26px;letter-spacing:1px;color:#ffffff}
+p{line-height:1.65;color:#aaaaaa;margin:8px 0}.tag{color:#ff4444}.layout{display:grid;grid-template-columns:minmax(420px,1fr) minmax(340px,480px);gap:22px;padding:24px}
+.panel{background:#0a0a0a;border:1px solid #333333;border-radius:8px;padding:20px;min-width:0}
+svg{width:100%;min-height:440px;background:#050505;border:1px solid #222222;border-radius:4px;}select,button{background:#111111;color:#ffffff;border:1px solid #444444;border-radius:4px;padding:10px;width:100%;margin:6px 0;font:inherit}
+button{cursor:pointer;width:auto;transition:background 0.2s}button:hover{background:#333333}h2{font-size:19px;margin:0 0 12px;color:#dddddd}h3{font-size:15px}pre{white-space:pre-wrap;overflow-wrap:anywhere;color:#00ffcc;background:#000000;padding:10px;border-radius:4px;font-size:12px;border:1px solid #222}
+.post{border-top:1px solid #333;padding:12px 0;overflow-wrap:anywhere}.post strong{font-size:12px;color:#ff5555}.post p{color:#cccccc;font-size:14px}
+line{stroke:#555555;stroke-width:1;opacity:.4}line.active{stroke:#ff4444;stroke-width:3;opacity:1}
+circle{fill:#666666;stroke:#000000;stroke-width:1;cursor:pointer}circle.active{fill:#ff4444;stroke:#ffffff;stroke-width:2}
+text{fill:#888888;font-size:11px;pointer-events:none}.summary{font-size:13px;color:#888}
+@media(max-width:850px){.layout{grid-template-columns:1fr;padding:12px}header{padding:20px}svg{min-height:340px}}
+</style>
+<header><h1>ANTI_FIMI <span class="tag">/ SOC 관제 센터</span></h1>
+<p>인지전 및 조작 캠페인 실시간 모니터링 대시보드</p>
+<p class="summary" id="summary"></p></header>
+<main class="layout"><section class="panel"><h2>탐지 네트워크 위상 (CIB 징후)</h2>
+<p>노드를 클릭하면 분석가 검증을 위한 상세 행동 증거(Evidence)를 출력합니다.</p>
+<button id="reset">전체 노드 초기화</button><svg id="graph" viewBox="0 0 760 660" role="img" aria-label="계정 공동 공유 네트워크"></svg>
+</section><section class="panel"><h2> 분석가 검증 및 대응 패널 (Inspector)</h2><label for="alerts" style="color:#888;font-size:12px;">발생 경보 (T-Code 기준)</label>
+<select id="alerts"></select><div id="detail"></div></section></main>
+<script id="data" type="application/json">__ANTI_FIMI_DATA__</script>
+<script>
+// 더미 데이터 주입 (시연용)
+const dummyData = {
+  "graph": {
+    "nodes": [
+      {"id": "Master_Bot_01"}, {"id": "Bot_Net_02"}, {"id": "Bot_Net_03"}, {"id": "Bot_Net_04"}, {"id": "Bot_Net_05"},
+      {"id": "FactChecker_A"}, {"id": "FactChecker_B"}
+    ],
+    "edges": [
+      {"source": "Master_Bot_01", "target": "Bot_Net_02", "alert_id": "T0087-CIB-01"},
+      {"source": "Master_Bot_01", "target": "Bot_Net_03", "alert_id": "T0087-CIB-01"},
+      {"source": "Master_Bot_01", "target": "Bot_Net_04", "alert_id": "T0087-CIB-01"},
+      {"source": "Master_Bot_01", "target": "Bot_Net_05", "alert_id": "T0087-CIB-01"}
+    ]
+  },
+  "alerts": [
+    {
+      "id": "T0087-CIB-01",
+      "kind": "repeated_url_coshare",
+      "priority": "review_high",
+      "reason_codes": ["T0087 (조직적 콘텐츠 공유)", "T0113 (콘텐츠 조작)"],
+      "account_ids": ["Master_Bot_01", "Bot_Net_02", "Bot_Net_03", "Bot_Net_04", "Bot_Net_05"],
+      "evidence_post_ids": ["POST_991", "POST_992"],
+      "episode_count": 4,
+      "window_end": "2026-10-10T21:45:00Z"
+    }
+  ],
+  "posts": {
+    "POST_991": {"account_id": "Master_Bot_01", "created_at": "2026-10-10T21:40:01Z", "text": "[긴급] APAC 재난훈련 전면 취소 확정. 미·한 동맹 균열? (가짜 공문 이미지 포함)"},
+    "POST_992": {"account_id": "Bot_Net_02", "created_at": "2026-10-10T21:40:01Z", "text": "RT @Master_Bot_01 [긴급] APAC 재난훈련 전면 취소 확정. 미·한 동맹 균열?"}
+  }
+};
+
+let dataText = document.getElementById('data').textContent;
+let data;
+try {
+   data = JSON.parse(dataText);
+} catch(e) {
+   data = dummyData; // 테스트용 더미
+}
+
+const svg=document.getElementById('graph'),select=document.getElementById('alerts');
+const detail=document.getElementById('detail'),ns='http://www.w3.org/2000/svg';
+const positions=new Map(),circles=new Map(),lines=[];
+document.getElementById('summary').textContent=`모니터링 대상 노드: ${data.graph.nodes.length} | 탐지된 위협 징후: ${data.alerts.length}건`;
+function element(tag,attrs,parent){const e=document.createElementNS(ns,tag);for(const[k,v]of Object.entries(attrs))e.setAttribute(k,v);parent.append(e);return e;}
+
+// 단순 원형 배치가 아닌 방사형(Star) 배치 로직 추가
+let cx = 380, cy = 330, radius = 200;
+data.graph.nodes.forEach((node,i)=>{
+  if (i === 0) { // 마스터 노드를 중앙에 배치
+      positions.set(node.id, [cx, cy]);
+  } else {
+      const angle=2*Math.PI*(i-1)/Math.max(1,data.graph.nodes.length-1)-Math.PI/2;
+      positions.set(node.id,[cx+radius*Math.cos(angle),cy+radius*Math.sin(angle)]);
+  }
+});
+
+data.graph.edges.forEach(edge=>{const[a,b]=positions.get(edge.source),[c,d]=positions.get(edge.target);const line=element('line',{x1:a,y1:b,x2:c,y2:d},svg);lines.push([line,edge]);line.addEventListener('click',()=>{populate();select.value=edge.alert_id;show();});});
+data.graph.nodes.forEach(node=>{const[x,y]=positions.get(node.id);const circle=element('circle',{cx:x,cy:y,r:6,tabindex:0,role:'button','aria-label':node.id},svg);circles.set(node.id,circle);const title=element('title',{},circle);title.textContent=node.id;const label=element('text',{x,y:y-12,'text-anchor':'middle'},svg);label.textContent=node.id;const choose=()=>{populate(node.id);show();};circle.addEventListener('click',choose);circle.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose();}});});
+function populate(account){select.replaceChildren();for(const alert of data.alerts){if(account&&!alert.account_ids.includes(account))continue;const o=document.createElement('option');o.value=alert.id;o.textContent=(alert.kind==='repeated_url_coshare'?'[CIB 탐지] ':'[스파이크 탐지] ')+alert.id;select.append(o);}if(!select.options.length){const o=document.createElement('option');o.textContent='해당 노드 경보 없음';o.value='';select.append(o);}}
+function paragraph(text,parent=detail){const p=document.createElement('p');p.textContent=text;parent.append(p);}
+function show(){detail.replaceChildren();const alert=data.alerts.find(a=>a.id===select.value);for(const[circleId,circle]of circles)circle.classList.toggle('active',!!alert&&alert.account_ids.includes(circleId));for(const[line,edge]of lines)line.classList.toggle('active',!!alert&&edge.alert_id===alert.id);if(!alert){paragraph('검토 대상을 선택하십시오.');return;}
+paragraph(' 위험 등급: '+(alert.priority==='review_high'?'CRITICAL (15분 내 최초 검토 요망)':'HIGH (60분 내 검토)'));
+paragraph(' 탐지 전술: '+alert.reason_codes.join(', '));
+paragraph(' 연루 계정 수: '+alert.account_ids.length+'개');
+const stats=document.createElement('pre');stats.textContent=JSON.stringify(alert.kind==='repeated_url_coshare'?{동시_공유_횟수:alert.episode_count,최종_관측시간:alert.window_end}:{시간:alert.hour,게시물:alert.post_count,직전_6시간:alert.baseline_counts,z값:alert.z_score,배수:alert.ratio},null,2);detail.append(stats);
+
+const actionBtn = document.createElement('button');
+actionBtn.textContent = ' CIB 봇넷 일괄 차단(Takedown) 공문 발송';
+actionBtn.style.background = '#aa0000';
+actionBtn.style.color = '#fff';
+actionBtn.style.marginTop = '15px';
+actionBtn.style.fontWeight = 'bold';
+actionBtn.onclick = () => alert('DISARM 대응 플레이북에 따라 해당 CIB 계정들의 플랫폼 차단 공문이 발송되었습니다.');
+detail.append(actionBtn);
+
+paragraph('----------------- 원문 증거 (Evidence) -----------------');
+for(const id of alert.evidence_post_ids){const post=data.posts[id];if(!post)continue;const card=document.createElement('div');card.className='post';const title=document.createElement('strong');title.textContent=`[${post.account_id}] ${post.created_at}`;card.append(title);paragraph(post.text,card);detail.append(card);}}
+select.addEventListener('change',show);document.getElementById('reset').addEventListener('click',()=>{populate();show();});populate();show();
+</script>
+</html>
+"""
+
+with open("dark_dashboard.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+    
+print("Saved to dark_dashboard.html")

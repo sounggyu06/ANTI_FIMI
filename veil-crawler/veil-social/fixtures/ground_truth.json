@@ -1,0 +1,89 @@
+{
+  "notice": "가상 부정 시나리오 템플릿 12개용 평가 정보입니다. 실제 X 게시물의 정답이나 국가 배후를 뜻하지 않습니다. 서버·수집기·모델에는 전달하지 않습니다.",
+  "labels": [
+    {
+      "post_id": "v-783f852d95",
+      "class": "manipulation_scenario",
+      "subcategory": "fabricated_claim",
+      "campaign_id": "fictional-cancel",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-04693fa3d1",
+      "class": "manipulation_scenario",
+      "subcategory": "fabricated_claim",
+      "campaign_id": "fictional-cancel",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-5623b9e892",
+      "class": "manipulation_scenario",
+      "subcategory": "fabricated_claim",
+      "campaign_id": "fictional-cancel",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-f6e50e5309",
+      "class": "manipulation_scenario",
+      "subcategory": "fabricated_claim",
+      "campaign_id": "fictional-cancel",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-8ffdcc4a3e",
+      "class": "manipulation_scenario",
+      "subcategory": "coordinated_amplification",
+      "campaign_id": "fictional-cancel",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-9962a71343",
+      "class": "manipulation_scenario",
+      "subcategory": "coordinated_amplification",
+      "campaign_id": "fictional-cancel",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-67cbb6fa88",
+      "class": "manipulation_scenario",
+      "subcategory": "coordinated_amplification",
+      "campaign_id": "fictional-cancel",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-4bc71bfa19",
+      "class": "manipulation_scenario",
+      "subcategory": "fear_appeal",
+      "campaign_id": "fictional-fear",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-7f41bdcb69",
+      "class": "manipulation_scenario",
+      "subcategory": "name_calling",
+      "campaign_id": "fictional-rhetoric",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-2395c28a93",
+      "class": "manipulation_scenario",
+      "subcategory": "impersonation",
+      "campaign_id": "fictional-deployment",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-5dc0eee10f",
+      "class": "manipulation_scenario",
+      "subcategory": "unsupported_claim",
+      "campaign_id": "fictional-deployment",
+      "image_group": "user_negative"
+    },
+    {
+      "post_id": "v-64342b1010",
+      "class": "manipulation_scenario",
+      "subcategory": "context_manipulation",
+      "campaign_id": "fictional-image",
+      "image_group": "user_negative"
+    }
+  ]
+}

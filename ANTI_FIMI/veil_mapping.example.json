@@ -1,0 +1,7 @@
+{
+  "id": "post_id",
+  "account_id": "author.id",
+  "created_at": "published_at",
+  "text": "body",
+  "urls": "links"
+}

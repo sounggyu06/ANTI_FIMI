@@ -1,0 +1,6 @@
+.new-demo-dialog { width: min(490px, calc(100vw - 32px)); padding: 26px; background: #111; color: #eee; border: 1px solid #444; border-radius: 12px; box-shadow: 0 20px 80px #000b; }
+.new-demo-dialog::backdrop { background: #000a; }
+.new-demo-dialog h2 { margin: 0 0 18px; font-size: 19px; }
+.new-demo-dialog p { font-size: 14px; line-height: 1.7; color: #bcbcbc; }
+.new-demo-dialog > div { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+.new-demo-dialog .new-demo-error { color: #ffaaaa; }

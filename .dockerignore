@@ -1,0 +1,26 @@
+# Allow only the files needed by the synthetic public demo.
+**
+!Dockerfile
+!.dockerignore
+!deploy_demo.py
+!ANTI_FIMI_운용표_v1.0.xlsx
+!ANTI_FIMI/
+!ANTI_FIMI/*.py
+!ANTI_FIMI/*.json
+!ANTI_FIMI/*.html
+!fimi-dashboard/
+!fimi-dashboard/package.json
+!fimi-dashboard/package-lock.json
+!fimi-dashboard/*.json
+!fimi-dashboard/*.js
+!fimi-dashboard/*.ts
+!fimi-dashboard/index.html
+!fimi-dashboard/src/
+!fimi-dashboard/src/**
+!fimi-dashboard/public/
+!fimi-dashboard/public/**
+**/*.backup-*
+**/*.bak
+**/.env*
+**/node_modules/**
+**/dist/**

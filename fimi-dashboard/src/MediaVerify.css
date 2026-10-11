@@ -1,0 +1,28 @@
+.media-verify { margin: 0 0 16px; }
+.media-verify .panel-heading { display: flex; justify-content: space-between; align-items: center; }
+.media-mode { font-size: 11px; color: #91a7ba; }
+.media-verify-body { padding: 14px 17px; display: flex; flex-direction: column; gap: 12px; }
+.media-caption, .media-limit { font-size: 12px; line-height: 1.6; color: #a8bbc9; margin: 0; }
+.media-caption code { overflow-wrap: anywhere; }
+.media-upload { position: relative; display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; border: 1px solid #6b899e; padding: 10px 14px; border-radius: 8px; cursor: pointer; color: #d9eefc; background: #173449; font-weight: 600; font-size: 12px; }
+.media-upload:focus-within { outline: 2px solid #a4d1ec; }
+.media-upload input { position: absolute; inset: 0; cursor: pointer; opacity: 0; width: 100%; }
+.media-upload:has(input:disabled) { opacity: .6; cursor: wait; }
+.media-file { font-size: 11px; display: flex; align-items: center; gap: 6px; overflow-wrap: anywhere; }
+.media-error { color: #ffc5c5; display: flex; align-items: center; gap: 7px; font-size: 12px; }
+.media-result { padding: 12px 13px; background: #172635; border: 1px solid #4a6577; border-radius: 8px; }
+.media-result-invalid { border-color: #a55757; }
+.media-result-trusted { border-color: #4d997a; }
+.media-result strong { font-size: 13px; }
+.media-result p { font-size: 12px; color: #b6c9d6; line-height: 1.5; }
+.media-result dl { font-size: 12px; margin: 8px 0; display: grid; gap: 6px; }
+.media-result dl>div { display: flex; gap: 12px; justify-content: space-between; align-items: baseline; }
+.media-result dt { flex: 0 0 auto; color: #91a7ba; }
+.media-result dd { text-align: right; overflow-wrap: anywhere; margin: 0; min-width: 0; }
+.media-result dd code { word-break: break-all; font-size: 10px; }
+.media-result details { margin-top: 8px; font-size: 12px; }
+.media-result li { overflow-wrap: anywhere; }
+.media-ai-actions { display: flex; flex-wrap: wrap; gap: 6px; font-size: 11px; }
+.media-limit { display: flex; gap: 6px; align-items: flex-start; }
+.media-limit svg { flex: 0 0 auto; }
+.media-external { align-self: flex-start; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: #93c9ef; }

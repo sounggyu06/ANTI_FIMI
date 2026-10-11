@@ -1,0 +1,65 @@
+# Secrets and local settings (commit only empty examples)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+secrets.json
+.npmrc
+.pypirc
+
+# Dependencies, caches and builds
+node_modules/
+.venv/
+.venv.previous-*/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+dist/
+dist-ssr/
+build/
+*.tsbuildinfo
+
+# Local collected data, databases and execution records
+/ANTI_FIMI_DEMO_DATA/
+/veil-crawler/runtime/
+/veil-crawler/crawler/output/
+/veil-crawler/crawler/logs/
+/veil-crawler/validation/
+/veil-crawler/reports/
+/veil-crawler/veil-social/data/*
+!/veil-crawler/veil-social/data/posts.json
+!/veil-crawler/veil-social/data/scenario-posts.json
+*.sqlite*
+*.db
+*.db-*
+*.log
+*.tmp
+*.pid
+
+# Historical installers and backups; their changes are already in source
+/.anti_fimi_c2pa_backups/
+/patch_payload/
+/INSTALL_C2PA.cmd
+/INSTALL_C2PA.py
+/INSTALL_SOURCE_TRACE.cmd
+/INSTALL_SOURCE_TRACE.py
+*.backup-*
+*.bak
+*.zip
+
+# Local task records and editor/OS files
+/work/
+/outputs/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini

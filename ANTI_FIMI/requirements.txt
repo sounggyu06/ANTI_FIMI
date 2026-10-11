@@ -1,0 +1,4 @@
+# Python 3.10+; CPU is sufficient. Offline lexical demo/tests use only stdlib.
+sentence-transformers==5.1.2
+torch==2.8.0
+# Use the CPU wheel index for torch, as shown in README, to reduce installation size.

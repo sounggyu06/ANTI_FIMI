@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: anti-fimi-demo
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
