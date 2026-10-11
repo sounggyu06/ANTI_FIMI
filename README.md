@@ -1,8 +1,10 @@
-# D4D / ANTI_FIMI
+기술 스택
 
-공개 게시물의 자료 연결과 반복 확산 행동을 분석하고, 분석가가 원문 근거와 대응 절차를 검토하는 해커톤 프로토타입입니다. 로컬 소셜 사이트 **VEIL**, 수집기, Python 분석 엔진, React 대시보드로 구성됩니다. 기본 실행은 LLM·외부 AI API·모델 다운로드·API 키 없이 동작합니다.
-
-이 저장소는 **소스 배포본**입니다. 기존 PC의 수집 자료, DB, 시연 이력과 빌드 결과는 포함하지 않습니다. 아래 순서로 화면을 빌드하고 합성 시나리오를 생성해 재현합니다.
+- 프론트엔드: React, TypeScript, Vite, Tailwind CSS
+- 시각화: ECharts, Cytoscape.js
+- 백엔드·분석: Python 3.12, 규칙 기반 자료 연결 및 반복 행동 분석
+- 수집·저장: requests, BeautifulSoup, SQLite
+- 시연·검증: Node.js 기반 VEIL, Excel 운용표, C2PA SDK
 
 ## 구현 기능
 
@@ -54,7 +56,7 @@ py -3.12 --version
 node --version
 npm.cmd --version
 
-# Git에는 dist가 없으므로 통합 실행 전에 대시보드를 빌드합니다.
+# 통합 실행 전에 대시보드를 빌드합니다.
 Push-Location .\fimi-dashboard
 npm.cmd ci
 npm.cmd run build
@@ -85,7 +87,7 @@ py -3.12 .\ANTI_FIMI\server.py --no-watch
 
 ### 선택: 이미지 C2PA 검증
 
-엔진을 실행하는 Python에만 설치한 뒤 서버를 재시작합니다. 이 PC에서 확인한 SDK 버전은 `0.38.0`입니다.
+엔진을 실행하는 Python에 SDK를 설치한 뒤 서버를 재시작합니다.
 
 ```powershell
 py -3.12 -m pip install c2pa-python==0.38.0
@@ -121,31 +123,10 @@ npm.cmd test
 Pop-Location
 ```
 
-## 저장소에 포함하지 않는 자료
+## 공개 데모 구성
 
-`.env`와 비밀키, 실제 수집 원문·이미지, 익명 ID 대응표, 모든 SQLite DB, 시연 이력, 로그, 런타임, `node_modules`, 가상환경, `dist`, 백업·과거 패치 설치 도구는 제외합니다. 실제 자료는 기존 PC에 보존됩니다. 재현에 필요한 합성 시나리오, 빈 `data/posts.json`, 테스트 샘플, 운용표와 의존성 잠금 파일은 포함합니다. `fixtures/`의 정답 라벨은 합성 시나리오 평가용이며 수집기 입력으로 사용하지 않습니다.
+`Dockerfile`과 `render.yaml`은 Render에서 실행할 수 있는 합성 데이터 데모 구성입니다. `deploy_demo.py`가 매 시작마다 임시 DB에 가상 게시물 49개를 생성합니다. 조사망·자료·출처·대응 절차 조회와 이미지 C2PA 검증을 제공하며, 데이터 변경 및 시연 초기화 API는 차단합니다. 실시간 수집과 VEIL 시뮬레이션은 Windows 통합 실행에서 제공합니다.
 
-이미지 샘플은 합성 시나리오 자료로 표시되어 있습니다. 별도 라이선스를 부여하지 않으며 제3자 자료의 사용권은 별도 확인이 필요합니다.
-
-## 해커톤 제출 주소
-
-- **저장소 URL**: 업로드한 GitHub 저장소의 주소입니다.
-- **데모 URL**: 외부에서 접속해 실행해 볼 수 있는 배포 주소입니다. `localhost`와 `127.0.0.1`은 제출용 공개 데모 URL이 아닙니다.
-
-이 저장소를 업로드하는 것만으로 데모 서버가 배포되지는 않습니다. 화면만 정적 호스팅하면 Python 분석 API와 실시간 수집은 동작하지 않습니다. 공개 데모에는 합성 데이터만 사용하고 서버 접근 범위를 별도로 정해야 합니다.
-
-### 고정 데모 주소: Render 배포
-
-`Dockerfile`과 `render.yaml`은 **49개 합성 게시물 조회 데모**를 배포합니다. 기존 로컬 서버와 별도인 `deploy_demo.py`를 실행하며 매 시작마다 임시 DB를 새로 만듭니다. 실제 수집 원문·DB·토큰은 이미지에 포함하지 않습니다. 공개 화면에서 조사망·자료·출처·대응 절차를 조회하고 C2PA 이미지를 검사할 수 있습니다. 원문 추가·AI 결과 입력·운용표 재읽기·새 시연 초기화 API는 403으로 차단합니다. 실시간 VEIL 시뮬레이션 전체는 위 Windows 통합 실행으로 제공합니다.
-
-1. 확인된 소스를 GitHub 저장소에 업로드합니다.
-2. [Render 대시보드](https://dashboard.render.com/)에서 **New → Web Service**를 선택합니다.
-3. 저장소와 `main` 브랜치를 선택합니다. 공개 저장소는 **Public Git Repository** 방식으로 URL을 입력할 수 있습니다. 비공개 저장소는 해당 저장소 읽기 권한을 연결해야 합니다.
-4. Language/Runtime은 **Docker**, Dockerfile 경로는 `./Dockerfile`, 인스턴스는 **Free**를 선택합니다. 저장소 루트를 사용하며 Build/Start Command는 별도로 덮어쓰지 않습니다.
-5. 배포 완료 후 Render가 표시하는 `https://…onrender.com` 주소를 열고 화면과 `/api/health`를 확인합니다. 이때 실제 발급된 주소를 제출 페이지의 **데모 URL**에 넣습니다.
-
-주소는 서비스가 유지되는 동안 고정되지만 [무료 인스턴스](https://render.com/docs/free)는 15분 동안 요청이 없으면 정지하고, 다음 접속 때 재시작에 약 1분 걸릴 수 있습니다. 재시작 시 동일 합성 데이터를 다시 생성합니다. 계정 한도·서비스 중단·콜드 스타트 때문에 무중단 운영을 보장하지 않습니다. 유료 인스턴스 선택은 별도 비용 승인이 필요합니다.
-
-배포용 서버를 로컬에서 먼저 확인하려면 대시보드 빌드 후 `py -3.12 .\deploy_demo.py`를 실행하고 `http://127.0.0.1:8790/`을 엽니다. 로컬 테스트는 기본적으로 외부 인터페이스에 열지 않습니다. Docker에서는 `DEMO_HOST=0.0.0.0`과 호스팅 플랫폼의 `PORT`로 접속을 받습니다.
+대시보드 빌드 후 `py -3.12 .\deploy_demo.py`로 로컬에서 확인할 수 있습니다. 기본 주소는 `http://127.0.0.1:8790/`입니다.
 
 상세 엔진 설명은 [ANTI_FIMI README](ANTI_FIMI/README.md), 시연 초기화는 [새 시연 안내](ANTI_FIMI/README_NEW_DEMO.md), 선택 AI 입력은 [AI 계약](ANTI_FIMI/AI_CONTRACT.md)을 참고하세요.
